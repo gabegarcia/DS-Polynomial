@@ -77,15 +77,15 @@ public class TermTest {
             c = COEFFICIENTS[i];
             e = EXPONENTS[i];
             expected = TERMS[i];
-
+                        
             test.setAll(c, e);
             actual = test.toString();
             actual = actual.replaceAll(" ", ""); //more flexible test doesnt depend on white space
-
             assertEquals("Expected and actual toStrings DON'T match", expected, actual);
+            
         }
     }
-
+/*
     @Test
     public void testFullConstructor() {
         Term test;
@@ -214,5 +214,5 @@ public class TermTest {
 
         }
     }
-
+*/
 }
