@@ -4,13 +4,52 @@ import java.util.regex.Pattern;
 
 public class Term implements Comparable<Term>{
 
-	int c;
-	int e;
+	int c, e; //c = coefficient; e = exponent;
+	
 	//Term constructors
 	
-	public Term() {}
+	public Term() {
+		c = 1;
+		e = 1;
+	}
 	
-	public Term(String t) {}
+	public Term(String t) {
+		String[] splitTerm = new String[2];
+		
+		//This function needs to separate the values from the string. 
+		if(t.length() != 0) {
+			if(t.contains("x")) {
+				String[] temp = t.split("x");
+				splitTerm[0] = temp[0];
+				
+				
+					
+					if(temp.length == 2) {
+						splitTerm[1] = temp[1];
+						System.out.print("splitTerm[1]: "+splitTerm[1] + "\n" + "Exponent: \n");
+						System.out.print(convertString(splitTerm[1]) + "\n");
+						//send both splitTerm[0] and [1] to setters to create a Term
+					} else {
+						System.out.print("splitTerm[0]: " + splitTerm[0] + "\n" + "Coefficient: \n");
+						System.out.print(convertString(splitTerm[0]) + "\n");
+						System.out.print("Exponent: \n" + "1\n");
+					}
+			} else {
+				
+				splitTerm[0] = t;
+				System.out.print("else splitTerm[0]: "+splitTerm[0]+"\n"+"Coefficient: \n");
+				System.out.print(convertString(splitTerm[0]) + "\n");
+				System.out.print("Exponent: \n" + "0\n");
+				//send both splitTerm[0] and 1 value to setters
+			}
+		} else
+			System.out.print("t is empty.\n");
+		
+		//Then convert them to ints. 
+		//Then call setters.
+		
+		
+	}
 	
 	//int c represents coefficient
 	//int e represents exponent
@@ -20,9 +59,53 @@ public class Term implements Comparable<Term>{
 	}
 	*/
 	
-	public Term(int c, int e) {}
+	public Term(int c, int e) {
+		setCoefficient(c);
+		setExponent(e);
+	}
 	
-	public Term(Term original) {}
+	public Term(Term original) {
+		
+		setCoefficient(original.getCoefficient());
+		setExponent(original.getExponent());
+	}
+	
+	//convert strings from TermTest TERMS[] to int
+	int convertString(String termString) {
+		int newInt = 0;
+		
+		if(termString.length() == 1) {
+			if(termString.equals("+")) {
+				newInt = 1;
+				//System.out.print("newInt: " + newInt + "\n");
+				return newInt;
+			} else if(termString.equals("-")){
+				//System.out.print("termString: " + termString + " termString.length(): " + termString.length() +"\n");
+				newInt = -1;
+				//System.out.print("newInt: " + newInt + "\n");
+				return newInt;
+				}
+		} else if(termString.length() > 1) {
+			if(termString.contains("+")) {
+				newInt = Integer.parseInt(termString);
+				//String[] temp = termString.split("+");
+				//newInt = Integer.parseInt(temp[1]); //does this need to be temp[1]
+				//System.out.print("newInt: " + newInt + "\n");
+				return newInt;
+			} else if(termString.contains("^")) {
+				String[] temp = termString.split("\\^");
+				newInt = Integer.parseInt(temp[1]);
+				//System.out.print("Trying to parse split exponent: " + newInt + "\n");
+				return newInt;
+			} else {
+				newInt = Integer.parseInt(termString);
+				//System.out.print("newInt: " + newInt + "\n");
+				return newInt;
+			}
+		}
+		//System.out.print("Last return newInt: " + newInt + "\n");
+		return newInt;
+	}
 	
 	int getCoefficient() {
 		
