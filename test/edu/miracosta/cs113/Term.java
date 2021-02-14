@@ -17,30 +17,39 @@ public class Term implements Comparable<Term>{
 		String[] splitTerm = new String[2];
 		
 		//This function needs to separate the values from the string. 
+		//Check is t is empty.
 		if(t.length() != 0) {
+			//Check is t contains "x" which will be used as a delimiter later.
 			if(t.contains("x")) {
-				String[] temp = t.split("x");
-				splitTerm[0] = temp[0];
-				
-				
-					
-					if(temp.length == 2) {
-						splitTerm[1] = temp[1];
-						System.out.print("splitTerm[1]: "+splitTerm[1] + "\n" + "Exponent: \n");
-						System.out.print(convertString(splitTerm[1]) + "\n");
+				String[] temp = t.split("x"); //split the String t using "x" as delimiter.
+				splitTerm[0] = temp[0]; //store the first index into an array that is outside this scope.
+						//check if temp has more than 1 index.
+						if(temp.length == 2) {
+						splitTerm[1] = temp[1]; //The second index is the Exponent.
+						//System.out.print("splitTerm[1]: "+splitTerm[1] + "\n" + "Exponent: \n");
+						//System.out.print(convertString(splitTerm[1]) + "\n");
 						//send both splitTerm[0] and [1] to setters to create a Term
+						setCoefficient(convertString(splitTerm[0]));
+						setExponent(convertString(splitTerm[1]));
 					} else {
-						System.out.print("splitTerm[0]: " + splitTerm[0] + "\n" + "Coefficient: \n");
-						System.out.print(convertString(splitTerm[0]) + "\n");
-						System.out.print("Exponent: \n" + "1\n");
+						//If temp[] has only 1 index, then Exponent defaults to "1".
+						//Send splitTerm[0] and "1" to setters to create a Term.
+						//System.out.print("splitTerm[0]: " + splitTerm[0] + "\n" + "Coefficient: \n");
+						//System.out.print(convertString(splitTerm[0]) + "\n");
+						//System.out.print("Exponent: \n" + "1\n");
+						setCoefficient(convertString(splitTerm[0]));
+						setExponent(1);
 					}
 			} else {
-				
+				//If String t does not contain "x", add it to splitTerm[0].
+				//0 is the default Exponent in this case.
 				splitTerm[0] = t;
-				System.out.print("else splitTerm[0]: "+splitTerm[0]+"\n"+"Coefficient: \n");
-				System.out.print(convertString(splitTerm[0]) + "\n");
-				System.out.print("Exponent: \n" + "0\n");
-				//send both splitTerm[0] and 1 value to setters
+				//System.out.print("else splitTerm[0]: "+splitTerm[0]+"\n"+"Coefficient: \n");
+				//System.out.print(convertString(splitTerm[0]) + "\n");
+				//System.out.print("Exponent: \n" + "0\n");
+				//send both splitTerm[0] and 0 value to setters
+				setCoefficient(convertString(splitTerm[0]));
+				setExponent(0);
 			}
 		} else
 			System.out.print("t is empty.\n");
@@ -141,14 +150,66 @@ public class Term implements Comparable<Term>{
 		String e;
 		String ce = null;
 		
-		if(this.c == 0) {
-			c = "";
+		//handle x = 0
+		
+		if(this.e == 0) {
 			e = "";
-			ce = c+e;
+			
+			if(this.c == 0) {
+				c = "";
+			} else if (this.c == 1) {
+				c = "+x";
+				e = "";
+			} else if (this.c == -1) {
+				c = "-x";
+				e = "";
+			} else if(this.c > 1) {
+				c = "+" + Integer.toString(this.c);
+				
+			} else if (this.c < -1) {
+				c = Integer.toString(this.c);
+				
+			} else
+				c = "";
+			
+		} else if(this.e == 1) { //handle x = 1
+			e = "";
+			if(this.c == 0) {
+				c = "";
+			} else if (this.c == 1) {
+				c = "+x";
+				e = "";
+			} else if (this.c == -1) {
+				c = "-x";
+				e = "";
+			} else if(this.c > 1) {
+				c = "+" + Integer.toString(this.c) + "x";
+				
+			} else if (this.c < -1) {
+				c = Integer.toString(this.c) + "x";
+				
+			} else
+				c = "";
 		} else {
-			c = Integer.toString(this.c);
-			e = Integer.toString(this.e);
-			ce = c+e;}
+				e = "^" + Integer.toString(this.e);
+				if(this.c == 1) {
+					c = "+x";
+				} else if(this.c == -1) {
+					c = "-x";
+				} else if(this.c > 1) {
+					c = "+" + Integer.toString(this.c) + "x";
+						
+				} else if (this.c < -1) {
+					c = Integer.toString(this.c) + "x";
+						
+				} else {
+					c = "";
+					e = "";		
+				} 
+				
+			}
+		
+		ce = c + e;
 		
 		return ce;
 	}

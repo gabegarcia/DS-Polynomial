@@ -66,7 +66,7 @@ public class TermTest {
             assertEquals("Expected and actual exponents DON'T match", e, test.getExponent());
         }
     }
-/*
+
     @Test
     public void testToString() {
         Term test = new Term();
@@ -85,7 +85,7 @@ public class TermTest {
             
         }
     }
-    */
+    
 
     @Test
     public void testFullConstructor() {
@@ -141,8 +141,8 @@ public class TermTest {
 
             test = new Term(t);
 
-            //assertEquals("Expected and actual coefficients DON'T match", c, test.getCoefficient());
-            //assertEquals("Expected and actual exponents DON'T match", e, test.getExponent());
+            assertEquals("Expected and actual coefficients DON'T match", c, test.getCoefficient());
+            assertEquals("Expected and actual exponents DON'T match", e, test.getExponent());
         }
     }
 /*
