@@ -160,11 +160,9 @@ public class TermTest {
             //System.out.print("test1 c: " + test1.c + "\ntest1 e: " + test1.e + "\n");
             //System.out.print("test2 c: " + test2.c + "\ntest2 e: " + test2.e + "\n\n" );
             
-            int test3 = 1;
-            int test4 = 1;
-            assertEquals("Expected and actual should be TRUE for equals", test3, test4);
             
-            //assertEquals("Expected and actual should be TRUE for equals", test1, test2);
+            
+            assertEquals("Expected and actual should be TRUE for equals", test1, test2);
             
             
         }
@@ -187,9 +185,9 @@ public class TermTest {
         }
     }
 
-/*
-    @Test
-    public void testClone() {
+
+    @Test //Gabe Garcia added throws statement
+    public void testClone() throws CloneNotSupportedException {
         Term original = new Term(10, -5);
         Term copy = (Term)original.clone();
 
@@ -210,8 +208,9 @@ public class TermTest {
             e = EXPONENTS[i];
 
             test = new Term(1, e);
+            
             compareResult = original.compareTo(test);
-
+            
             if( COMPARE_TO_VALUES[i] == ORIGINAL_EQUALS_TEST) {
                 assertEquals("Expected and actual compareTo result (original exponent EQUALS test exponent) DON'T match",
                         0, compareResult);
@@ -226,5 +225,6 @@ public class TermTest {
 
         }
     }
-*/
+    
+
 }

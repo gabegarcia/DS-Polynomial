@@ -2,7 +2,7 @@ package edu.miracosta.cs113;
 
 import java.util.regex.Pattern;
 
-public class Term implements Comparable<Term>{
+public class Term implements Comparable<Term>, Cloneable{
 
 	int c, e; //c = coefficient; e = exponent;
 	
@@ -116,7 +116,7 @@ public class Term implements Comparable<Term>{
 		return newInt;
 	}
 	
-	int getCoefficient() {
+	public int getCoefficient() {
 		
 		return c;
 	}
@@ -139,9 +139,17 @@ public class Term implements Comparable<Term>{
 		this.e = e;
 	}
 
+/*
 	protected Term clone() {
 		Term t = null;
 		return t;
+	}
+*/
+	@Override
+	public Object clone() throws CloneNotSupportedException
+	{
+		
+		return super.clone();
 	}
 	
 	@Override
@@ -221,14 +229,40 @@ public class Term implements Comparable<Term>{
 	@Override
 	public int compareTo(Term o) {
 		// TODO Auto-generated method stub
-		return 0;
+		int compareC = 1;
+		int compareE = 1;
+		int result;
+		
+		//if coefficients are equal, then set compareC to 0 and compare Exponents
+		if(this.getCoefficient() == o.getCoefficient()) {
+			compareC = 0;
+			if(this.getExponent() == o.getExponent()) {
+				compareE = 0;
+			} else if (this.getExponent() < o.getExponent()) {
+				compareE = -1;
+			}
+		} else if(this.getCoefficient() < o.getCoefficient()) {
+			compareC = -1;
+			if(this.getExponent() == o.getExponent()) {
+				compareE = 0;
+			} else if (this.getExponent() < o.getExponent()) {
+				compareE = -1;
+			}
+		}
+		
+		result = compareC + compareE;
+		
+		return result;
 	}
 	
-	public boolean equals(Term t) {
-		if(t.getCoefficient() == this.getCoefficient() && t.getExponent() == this.getExponent()) {
-			return true;
-		} else
-			return false;
-	}
+
+	
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Term)) return false;
+        Term term = (Term) o;
+        return e == term.e && c == term.c;
+    }
 	
 }
