@@ -224,4 +224,11 @@ public class Term implements Comparable<Term>{
 		return 0;
 	}
 	
+	public boolean equals(Term t) {
+		if(t.getCoefficient() == this.getCoefficient() && t.getExponent() == this.getExponent()) {
+			return true;
+		} else
+			return false;
+	}
+	
 }
