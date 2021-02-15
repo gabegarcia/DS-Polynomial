@@ -19,6 +19,8 @@
 
 package edu.miracosta.cs113;
 
+import static org.junit.Assert.assertEquals;
+
 public class PolynomialTest {
 
     //TERMS + POLYNOMIALS with unique terms (no duplicate terms = terms with same exponents)
