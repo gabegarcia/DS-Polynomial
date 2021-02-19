@@ -108,7 +108,7 @@ public class PolynomialTest {
                             new Term(-2, -1),
     };
 
-/*
+
     @Test
     public void testUniqueAddTermTypeBySizeOfList1() {
         Polynomial test = new Polynomial();
@@ -131,7 +131,7 @@ public class PolynomialTest {
         }
     }
 
-*/
+
     @Test
     public void testToStringUnique1() {
         Polynomial test = new Polynomial();

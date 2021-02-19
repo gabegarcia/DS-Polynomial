@@ -93,17 +93,24 @@ public class Polynomial extends Term {
 	public String toString() {
 		//String c = Integer.toString(this.getCoefficient());
 		//String e = Integer.toString(this.getExponent());
-		String polyString, temp;
+		String polyStr, temp;
 		
 		//handle x = 0
 		if(listSize == 0)
 			return "0";
 		
 		temp = myPolynomial.toString();
-		polyString = temp.substring(2,6);
+		temp = temp.replace("[", "");
+		temp = temp.replace("]", "");
+		temp = temp.replace(",", "");
 		
-		System.out.print("From toString(): " + polyString);
-		return polyString;
+		if(temp.charAt(0) == '+') {
+			temp=temp.substring(1);
+		}
+		
+		
+		System.out.print("From toString(): " + temp + "\n");
+		return temp;
 	}
 
 	public void clear() {
