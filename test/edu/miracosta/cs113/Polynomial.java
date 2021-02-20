@@ -16,12 +16,12 @@ public class Polynomial extends Term {
 	
 
 	
-	private LinkedList<Term> myPolynomial = new LinkedList<Term>();
+	private LinkedList<Term> myPoly;
 	
 	//Constructors
 	public Polynomial() {
 		//reset size
-		listSize = 0;
+		this.myPoly = new LinkedList();
 	}
 	
 	public Polynomial(Polynomial original) {
@@ -32,47 +32,50 @@ public class Polynomial extends Term {
 	//addTerm is similar to addFirst()
 	public void addTerm(Term o) {
 		
-		System.out.print("listSize: " + listSize + "\n");
-				
-		if(listSize == 0) {
-			
-			myPolynomial.addFirst(o);
-		
-		} else if(o.getExponent() < myPolynomial.get(listSize-1).getExponent()) {
-				
-				myPolynomial.addLast(o);
-			
-		} else 
-				
-			myPolynomial.addFirst(o);
-					
-					
-		System.out.print("From myPolynomial: " + myPolynomial + "\n");
-		
-		listSize++;
-	}
-	
-	/*
-	private void addFirst(Term item) {
-		head = new Node<Term>(item, head);
-				
-	}
-	
-	private void addAfter(Node<Term> node, Term item) {
-		node.next = new Node<Term>(item, node.next);
-	}
-	
-	private Node<Term> getNode(int index){
-		Node<Term> node = head;
+		System.out.print("myPoly.size(): " + myPoly.size() + "\n");
 		int i = 0;
-		while(i < index && node != null) {
-			node = node.next;
-			i++;
-		}
-		return node;
+		LinkedList<Term> tempList = new LinkedList<Term>();
+		if(myPoly.size() == 0) {
+			myPoly.addFirst(o);
+			
+		} else if(myPoly.peekLast().getExponent() > o.getExponent()) {
+				System.out.print("peekLast(): " + myPoly.peekLast().getExponent() + "\n");
+				System.out.print("getExponent(): " + o.getExponent() + "\n");
+				myPoly.addLast(o);
+			} else {
+				//myPoly.addFirst(o); //TODO need to figure out how to insert if peekLast < getExponent()
+				
+				while(myPoly.size() != 0) {
+					
+					if(myPoly.peekLast().getExponent() < o.getExponent()) {
+						tempList.addLast(myPoly.removeLast());
+						if(myPoly.size() == 0) {
+							tempList.addFirst(o);
+						}
+					} else {
+						tempList.addFirst(o);
+						tempList.addFirst(myPoly.removeLast());
+						System.out.println("From tempList else statement: " + tempList);
+					}
+					
+				}
+			}
+				
+				
+				//then consider what to do when exponents are equal
+		
+				//repopulate myPoly
+				System.out.println("tempList.size(): " + tempList.size());
+				while(tempList.size() != 0) {
+					myPoly.addFirst(tempList.removeLast());
+				}
+				
+	System.out.print("From myPolynomial: " + myPoly + "\n");
+		
+		
 	}
-*/
 	
+		
 	public Term getTerm(int i) {
 		
 		Term temp = new Term();
@@ -86,7 +89,7 @@ public class Polynomial extends Term {
 	public int getNumTerms() {
 		//int numTerms = this.size();
 		
-		return listSize;
+		return myPoly.size();
 	}
 	
 	@Override
@@ -99,7 +102,7 @@ public class Polynomial extends Term {
 		if(listSize == 0)
 			return "0";
 		
-		temp = myPolynomial.toString();
+		temp = myPoly.toString();
 		temp = temp.replace("[", "");
 		temp = temp.replace("]", "");
 		temp = temp.replace(",", "");
