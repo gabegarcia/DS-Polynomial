@@ -111,6 +111,7 @@ public class PolynomialTest {
 
     @Test
     public void testUniqueAddTermTypeBySizeOfList1() {
+    	System.out.print("testUniqueAddTermTypeBySizeOfList1 test:\n");
         Polynomial test = new Polynomial();
         assertEquals("List NOT created as empty list", 0, test.getNumTerms());
 
@@ -119,9 +120,10 @@ public class PolynomialTest {
             assertEquals("Term was NOT added to list of terms", i+1, test.getNumTerms());
         }
     }
-      
+         
     @Test
     public void testUniqueAddTermTypeBySizeOfList2() {
+    	System.out.print("testUniqueAddTermTypeBySizeOfList2\n");
         Polynomial test = new Polynomial();
         assertEquals("List NOT created as empty list", 0, test.getNumTerms());
 
@@ -134,27 +136,25 @@ public class PolynomialTest {
 
     @Test
     public void testToStringUnique1() {
+    	System.out.print("testToStringUnique1\n");
         Polynomial test = new Polynomial();
         String expected, actual;
         assertEquals("Empty list of terms INCORRECT", "0", test.toString());
 
         for(int i = 0; i < UNIQUE_TERMS1.length; i++) {
             test.addTerm(UNIQUE_TERMS1[i]);
-            //System.out.print("test: " + test + "\n");
-            
+                        
             //remove whitespace from Strings, more flexible testing (doesn't depend on whitespace matching)
             expected = UNIQUE_POLY1[i].replaceAll(" ", "");
-            //System.out.print("expected: " + expected + "\n");
-            
             actual = test.toString().replaceAll(" ", "");
-            //System.out.print("actual: " + actual + "\n");
             assertEquals("Expected and actual polynomial toString DON'T match", expected, actual);
         }
-        //System.out.print(test);
+        
     }
-/*
+   
     @Test
     public void testToStringUnique2() {
+    	System.out.print("testToStringUnique2");
         Polynomial test = new Polynomial();
         String expected, actual;
         assertEquals("Empty list of terms INCORRECT", "0", test.toString());
@@ -169,7 +169,7 @@ public class PolynomialTest {
             assertEquals("Expected and actual polynomial toString DON'T match", expected, actual);
         }
     }
-
+    
     @Test
     public void testUniqueAddTermTypeByFinalPositions1() {
         Term actualOrderedTerm, expectedOrderedTerm;
@@ -189,7 +189,7 @@ public class PolynomialTest {
             assertEquals("Expected and actual term DON'T match", expectedOrderedTerm, actualOrderedTerm);
         }
     }
-
+    
     @Test
     public void testUniqueAddTermTypeByFinalPositions2() {
         Term actualOrderedTerm, expectedOrderedTerm;
@@ -209,7 +209,7 @@ public class PolynomialTest {
             assertEquals("Expected and actual term DON'T match", expectedOrderedTerm, actualOrderedTerm);
         }
     }
-
+    
     @Test
     public void testDuplicateAddTermTypeBySizeOfList() {
         int finalSize = DUPLICATE_TERMS.length - DUPLICATE_NUM;
@@ -229,7 +229,7 @@ public class PolynomialTest {
                     finalSize, test.getNumTerms());
         }
     }
-
+    
     @Test
     public void testDuplicateAddTermTypeByFinalPositions() {
         Term actualOrderedTerm, expectedOrderedTerm;
@@ -275,7 +275,7 @@ public class PolynomialTest {
         }
 
         test1.add(test2);
-
+        
         for(int i = 0; i < test1.getNumTerms(); i++) {
             actualTerm = test1.getTerm(i);
             expectedTerm = UNIQUE_ADD_ORDER[i];
@@ -306,7 +306,7 @@ public class PolynomialTest {
         }
         
     }
-*/
+
     /** TODO only allowed to change this file for EXTRA CREDIT
      * add tests for:
      * - duplicate add terms by string (not Term objects),
