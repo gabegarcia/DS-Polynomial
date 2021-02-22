@@ -26,7 +26,20 @@ public class Polynomial extends Term {
 	}
 	
 	public Polynomial(Polynomial original) {
-		Polynomial newPolynomial = new Polynomial(original);
+		LinkedList<Term> tempList = new LinkedList<Term>();
+		
+		
+		for(int i = 0; i < original.myPoly.size(); i++) {
+			
+			int c, e;
+			c = original.myPoly.get(i).getCoefficient();
+			e = original.myPoly.get(i).getExponent();
+						
+			tempList.addLast(new Term(c, e));
+			
+		}
+		
+		myPoly = tempList;
 	}
 	
 	//Methods
@@ -73,9 +86,6 @@ public class Polynomial extends Term {
 			}
 		} 
 		
-			
-		
-
 			System.out.print("myPoly.size() after while loop: " + myPoly.size() + "\n");
 				//then consider what to do when exponents are equal
 		
@@ -88,12 +98,10 @@ public class Polynomial extends Term {
 				
 		
 				
-	System.out.print("From myPolynomial: " + myPoly + "\n");
+				System.out.print("From myPolynomial: " + myPoly + "\n");
 		
 		
 	}
-	
-	
 	
 		
 	public Term getTerm(int i) {
@@ -104,6 +112,33 @@ public class Polynomial extends Term {
 	
 	public void add(Polynomial p) {
 		
+		Term tempTerm;
+		LinkedList<Term> tempList = new LinkedList<Term>();
+		Polynomial temp = new Polynomial();
+		System.out.println("From add() p.myPoly: " + p.myPoly);
+		System.out.println("From add() this.myPoly: " + this.myPoly);
+		
+		
+		for(int i = 0; i < this.myPoly.size(); i++) {
+			temp.addTerm(this.myPoly.get(i));
+		}
+		
+		for(int j = 0; j < p.myPoly.size(); j++) {
+			temp.addTerm(p.myPoly.get(j));
+		}
+		
+		this.myPoly.clear();
+		
+		for(int x = 0; x < temp.myPoly.size(); x++) {
+			if(temp.myPoly.get(x).getCoefficient() != 0) {
+				this.addTerm(temp.myPoly.get(x));
+			}
+		}
+		System.out.println("From add() tempList after while loop: " + temp);
+		System.out.println("From add() this.myPoly after while loop: " + this.myPoly);
+		//add coefficients when exponents match
+		//replace 'this' term with new term
+		//keep existing terms if no exponent match.
 	}
 	
 	public int getNumTerms() {
@@ -138,7 +173,9 @@ public class Polynomial extends Term {
 
 	public void clear() {
 		// TODO Auto-generated method stub
-		
+		while(myPoly.size() != 0) {
+			myPoly.removeFirst();
+		}
 	}
 	
 }
