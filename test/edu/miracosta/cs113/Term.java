@@ -1,6 +1,7 @@
 package edu.miracosta.cs113;
 
 import java.util.regex.Pattern;
+import java.util.List;
 
 public class Term implements Comparable<Term>, Cloneable{
 
@@ -226,7 +227,7 @@ public class Term implements Comparable<Term>, Cloneable{
         return Pattern.compile(regex).matcher((CharSequence) this).replaceAll(replacement);  
 } 
 	
-	@Override
+	/*@Override
 	public int compareTo(Term o) {
 		// TODO Auto-generated method stub
 		int compareC = 1;
@@ -253,7 +254,21 @@ public class Term implements Comparable<Term>, Cloneable{
 		result = compareC + compareE;
 		
 		return result;
+	}*/
+	
+	@Override
+	public int compareTo(Term o) {
+		int result = 0;
+		
+		if(this.getExponent() < o.getExponent()) {
+			return -1;
+		} else if(this.getExponent() > o.getExponent()) {
+			return 1;
+		} else
+			
+		return result;
 	}
+	
 	
 
 	
@@ -264,5 +279,9 @@ public class Term implements Comparable<Term>, Cloneable{
         Term term = (Term) o;
         return e == term.e && c == term.c;
     }
+
+	
+
+
 	
 }
