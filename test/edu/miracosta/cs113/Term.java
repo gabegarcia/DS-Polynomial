@@ -1,3 +1,14 @@
+/**
+ * DS-Polynomial Junit Testing Homework 3
+ * Term.java file
+ * CS113
+ * Mon 5:30
+ * 
+ * @author Gabe Garcia
+ * @version 1.0
+ * @since 2-27-2021
+ */
+
 package edu.miracosta.cs113;
 
 import java.util.regex.Pattern;
@@ -8,12 +19,13 @@ public class Term implements Comparable<Term>, Cloneable{
 	int c, e; //c = coefficient; e = exponent;
 	
 	//Term constructors
-	
+	//Default constructor
 	public Term() {
 		c = 1;
 		e = 1;
 	}
 	
+	//String constructor
 	public Term(String t) {
 		String[] splitTerm = new String[2];
 		
@@ -27,17 +39,12 @@ public class Term implements Comparable<Term>, Cloneable{
 						//check if temp has more than 1 index.
 						if(temp.length == 2) {
 						splitTerm[1] = temp[1]; //The second index is the Exponent.
-						//System.out.print("splitTerm[1]: "+splitTerm[1] + "\n" + "Exponent: \n");
-						//System.out.print(convertString(splitTerm[1]) + "\n");
 						//send both splitTerm[0] and [1] to setters to create a Term
 						setCoefficient(convertString(splitTerm[0]));
 						setExponent(convertString(splitTerm[1]));
 					} else {
 						//If temp[] has only 1 index, then Exponent defaults to "1".
 						//Send splitTerm[0] and "1" to setters to create a Term.
-						//System.out.print("splitTerm[0]: " + splitTerm[0] + "\n" + "Coefficient: \n");
-						//System.out.print(convertString(splitTerm[0]) + "\n");
-						//System.out.print("Exponent: \n" + "1\n");
 						setCoefficient(convertString(splitTerm[0]));
 						setExponent(1);
 					}
@@ -45,9 +52,6 @@ public class Term implements Comparable<Term>, Cloneable{
 				//If String t does not contain "x", add it to splitTerm[0].
 				//0 is the default Exponent in this case.
 				splitTerm[0] = t;
-				//System.out.print("else splitTerm[0]: "+splitTerm[0]+"\n"+"Coefficient: \n");
-				//System.out.print(convertString(splitTerm[0]) + "\n");
-				//System.out.print("Exponent: \n" + "0\n");
 				//send both splitTerm[0] and 0 value to setters
 				setCoefficient(convertString(splitTerm[0]));
 				setExponent(0);
@@ -55,25 +59,18 @@ public class Term implements Comparable<Term>, Cloneable{
 		} else
 			System.out.print("t is empty.\n");
 		
-		//Then convert them to ints. 
-		//Then call setters.
-		
-		
 	}
 	
 	//int c represents coefficient
 	//int e represents exponent
-	
-	/*public Term(int c) {
-		setCoefficient(c);
-	}
-	*/
-	
+
+	//int constructor
 	public Term(int c, int e) {
 		setCoefficient(c);
 		setExponent(e);
 	}
 	
+	//Term copy constructor
 	public Term(Term original) {
 		
 		setCoefficient(original.getCoefficient());
@@ -87,33 +84,30 @@ public class Term implements Comparable<Term>, Cloneable{
 		if(termString.length() == 1) {
 			if(termString.equals("+")) {
 				newInt = 1;
-				//System.out.print("newInt: " + newInt + "\n");
 				return newInt;
 			} else if(termString.equals("-")){
-				//System.out.print("termString: " + termString + " termString.length(): " + termString.length() +"\n");
+				
 				newInt = -1;
-				//System.out.print("newInt: " + newInt + "\n");
+				
 				return newInt;
 				}
 		} else if(termString.length() > 1) {
 			if(termString.contains("+")) {
 				newInt = Integer.parseInt(termString);
-				//String[] temp = termString.split("+");
-				//newInt = Integer.parseInt(temp[1]); //does this need to be temp[1]
-				//System.out.print("newInt: " + newInt + "\n");
+				
 				return newInt;
 			} else if(termString.contains("^")) {
 				String[] temp = termString.split("\\^");
 				newInt = Integer.parseInt(temp[1]);
-				//System.out.print("Trying to parse split exponent: " + newInt + "\n");
+				
 				return newInt;
 			} else {
 				newInt = Integer.parseInt(termString);
-				//System.out.print("newInt: " + newInt + "\n");
+				
 				return newInt;
 			}
 		}
-		//System.out.print("Last return newInt: " + newInt + "\n");
+		
 		return newInt;
 	}
 	
@@ -140,12 +134,7 @@ public class Term implements Comparable<Term>, Cloneable{
 		this.e = e;
 	}
 
-/*
-	protected Term clone() {
-		Term t = null;
-		return t;
-	}
-*/
+
 	@Override
 	public Object clone() throws CloneNotSupportedException
 	{
@@ -268,10 +257,7 @@ public class Term implements Comparable<Term>, Cloneable{
 			
 		return result;
 	}
-	
-	
-
-	
+		
 	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -279,9 +265,5 @@ public class Term implements Comparable<Term>, Cloneable{
         Term term = (Term) o;
         return e == term.e && c == term.c;
     }
-
-	
-
-
-	
+		
 }
