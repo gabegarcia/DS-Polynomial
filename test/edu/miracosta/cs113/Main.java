@@ -1,3 +1,15 @@
+/**
+ * DS-Polynomial Junit Testing Homework 3
+ * Driver file
+ * CS113
+ * Mon 5:30
+ * 
+ * @author Gabe Garcia
+ * @version 1.0
+ * @since 2-27-2021
+ */
+
+
 package edu.miracosta.cs113;
 import java.util.Scanner;  // Import the Scanner class
 
