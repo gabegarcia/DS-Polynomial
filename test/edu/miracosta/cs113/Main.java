@@ -17,7 +17,7 @@ public class Main {
 	public static void main(String args[]) {
 		
 		Scanner keyboard = new Scanner(System.in);
-		String c = ""; //coefficient
+		String c = " "; //coefficient
 		String e; //exponent
 		String ce;
 	
@@ -25,17 +25,20 @@ public class Main {
 		
 		Term term, term2;
 		Polynomial newPoly = new Polynomial();
+		Polynomial secondPoly = new Polynomial();
 		
-		while(c != "e") {
+		System.out.println("Do stuff to your first polynomial:");
 		
-			System.out.println("Enter 'e' to exit\nEnter 'c' to clear\nEnter 'a' to add a new term\n ");
+		while(c.charAt(0) != 'e') {
+		
+			System.out.println("Enter 'e' to exit Polynomial Build\nEnter 'c' to clear\nEnter 'a' to add a new term\n ");
 		
 			c = keyboard.next();
 			
 						
 			if(c.equals("e")) {
-				System.out.println("Program exiting...");
-				System.exit(0);
+				System.out.println("Exiting Polynomial Build...");
+				
 			} else if(c.equals("c")){
 				newPoly.clear();
 			}
@@ -45,11 +48,43 @@ public class Main {
 				c = keyboard.next();
 				term = new Term(c);
 				newPoly.addTerm(term);
-				System.out.println("\nYour Polynomial: " + newPoly + "\n");
+				System.out.println("\nYour Polynomial newPoly: " + newPoly + "\n");
 				//System.out.println("c: " + c);
 			}
 	
 		}
+		
+		c = " "; //reset c to "";
+		
+		System.out.println("Build your second polynomial...");
+		while(c.charAt(0) != 'e') {
+			
+			System.out.println("Enter 'e' to exit Polynomial Build\nEnter 'c' to clear\nEnter 'a' to add a new term\n ");
+		
+			c = keyboard.next();
+			
+						
+			if(c.equals("e")) {
+				System.out.println("Exiting Polynomial Build...");
+				
+			} else if(c.equals("c")){
+				secondPoly.clear();
+			}
+			else if(c.equals("a"))
+			{
+				System.out.println("Enter a Term in this format: +2x^7:");
+				c = keyboard.next();
+				term = new Term(c);
+				secondPoly.addTerm(term);
+				System.out.println("\nYour Polynomial secondPoly: " + secondPoly + "\n");
+				//System.out.println("c: " + c);
+			}
+	
+		}
+		
+		System.out.println("Adding two polynomials together...");
+		newPoly.add(secondPoly);
+		System.out.println("Your updated newPoly: " + newPoly);
 						
 		
 	}
